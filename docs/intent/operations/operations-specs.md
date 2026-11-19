@@ -28,9 +28,9 @@ Status markers: `[x]` observed working in current code, `[ ]` specified but brok
 ## Dependency Scanning and Policy
 
 - [x] **OPS-DEPS-001**: The supply-chain scan shall export the frozen lockfile to a requirements file, run an OSV scan of `uv.lock`, run pip-audit on the exported requirements, and run a Socket Security scan only when its API key secret is present.
-- [x] **OPS-DEPS-002**: Renovate shall group minor and patch updates into one pull request, wait three days after release, and automerge them; major updates shall not be automerged and shall carry the `major-update` label.
+- [x] **OPS-DEPS-002**: Renovate shall extend the shared preset `github>tgrecojr/renovate-config`, under which it shall group minor and patch updates into one pull request, wait until the release is seven days old, and automerge them; vulnerability fixes shall open immediately and automerge once seven days old; major updates shall not be automerged and shall carry the `major-update` label.
 - [x] **OPS-DEPS-003**: Renovate shall update the Chainguard builder and runtime images together in a single pull request.
-- [x] **OPS-DEPS-004**: Renovate shall pin Docker image digests, automerge digest updates at any time, and run lockfile maintenance weekly before 4am on Mondays.
+- [x] **OPS-DEPS-004**: Renovate shall pin Docker image and GitHub Actions digests, raise digest updates at any time and automerge them, and run lockfile maintenance weekly before 4am on Mondays without automerging it.
 
 ## Pre-flight Verification
 

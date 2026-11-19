@@ -12,7 +12,7 @@ Operations covers everything that gets the agent from a commit to a running, tru
 Principles:
 
 - **Merge means ship.** A push to `main` produces a published, signed, multi-architecture image with attestations. There is no separate release step.
-- **Current by default.** Renovate automerges every non-major update after a short stability window; humans review only majors. Lockfile maintenance runs weekly.
+- **Current by default.** Renovate automerges every non-major update once the release is seven days old; humans review majors and the weekly lockfile maintenance PR. The policy lives in the shared preset `github>tgrecojr/renovate-config`.
 - **Nothing secret in the image.** Credentials, the OAuth token, the label file, and the environment are mounted or injected at run time. The image contains code and dependencies only.
 - **Tell the operator before spending money or time.** `verify_setup.py` checks the host and sends exactly one tiny paid decision so a bad key or empty account is found before the loop starts.
 
@@ -89,7 +89,7 @@ On push to `main`:
 | Image trust | Keyless cosign signature plus SBOM and provenance attestations | Unsigned images; key-based signing | Verifiable images with no key to manage; GitHub's OIDC identity is the signer. |
 | Architectures | `linux/amd64` only | amd64 and arm64 | The agent runs on one x86 host; an arm64 build and the QEMU step it needs add CI time for an image nobody pulls. |
 | Image retention | Keep `latest` and five tagged versions, delete untagged, weekly | Keep everything; keep by age | Bounds registry storage while leaving enough history to roll back a few merges. |
-| Renovate posture | Automerge non-majors after 3 days; majors need review; digests immediately | Review everything; automerge everything | Non-major updates on a small single-user service are low risk and high volume; majors can need migration work (rule descriptions in `renovate.json`). |
+| Renovate posture | Shared preset: automerge non-majors after 7 days; majors and lockfile maintenance need review; digests immediately | Review everything; automerge everything | Non-major updates on a small single-user service are low risk and high volume; majors can need migration work; the 7-day wait lets a compromised release be caught before it is installed (rule descriptions in the shared preset). |
 | Coverage floor | 90% line coverage on pull requests | 75%; no floor; a floor at the current 95% | The suite sits at about 96%, so 75% would let a quarter of the code lose its tests before CI noticed. 90% leaves room for ordinary churn while catching a real drop. |
 | Lint severity | flake8 fails only on syntax errors and undefined names; style findings are advisory; black is enforced | Fail on every flake8 finding | Formatting is objective and black decides it; style warnings are informative (workflow comments, `test.yml`). |
 | PR gate scope | Tests, lint, and an image build without push | Tests and lint only | A Dockerfile or lockfile regression should fail the pull request, not the first push to `main`. |
