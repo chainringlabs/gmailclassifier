@@ -12,7 +12,7 @@ Operations covers everything that gets the agent from a commit to a running, tru
 Principles:
 
 - **Merge means ship.** A push to `main` produces a published, signed, multi-architecture image with attestations. There is no separate release step.
-- **Current by default.** Renovate automerges every non-major update once the release is seven days old; humans review majors and the weekly lockfile maintenance PR. The policy lives in the shared preset `github>tgrecojr/renovate-config`.
+- **Current by default.** Renovate automerges every non-major update once the release is seven days old; humans review majors and the weekly lockfile maintenance PR. The policy lives in the shared preset `github>tgrecojr/renovate-config`. uv enforces the same seven days on its own resolutions (`exclude-newer` in `pyproject.toml`), which covers transitive dependencies and manual `uv lock` runs.
 - **Nothing secret in the image.** Credentials, the OAuth token, the label file, and the environment are mounted or injected at run time. The image contains code and dependencies only.
 - **Tell the operator before spending money or time.** `verify_setup.py` checks the host and sends exactly one tiny paid decision so a bad key or empty account is found before the loop starts.
 
