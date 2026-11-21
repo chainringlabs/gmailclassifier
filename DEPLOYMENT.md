@@ -86,7 +86,7 @@ If you must authorize on the server itself, set `GMAIL_HEADLESS_MODE=true` and r
 
 **Important:** The `./data` volume is required to persist the email state file (`.email_state.json`) across container restarts. Without it, the agent would reprocess all unread emails after each restart.
 
-The published image is `ghcr.io/tgrecojr/gmailclassifier:latest`, built for `linux/amd64` on every push to `main`, signed with cosign, with an SBOM and build provenance attested to the registry. The image already sets `GMAIL_HEADLESS_MODE=true` and the container paths for credentials, token, label config, and state.
+The published image is `ghcr.io/chainringlabs/gmailclassifier:latest`, built for `linux/amd64` on every push to `main`, signed with cosign, with an SBOM and build provenance attested to the registry. The image already sets `GMAIL_HEADLESS_MODE=true` and the container paths for credentials, token, label config, and state.
 
 ---
 
