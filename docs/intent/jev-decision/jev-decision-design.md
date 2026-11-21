@@ -24,7 +24,7 @@ One request per email. All questions are evaluated by Jev in a single call.
 ```
 POST {decisions_url}            default https://openrouter.ai/api/alpha/decisions
 Authorization: Bearer {OPENROUTER_API_KEY}
-HTTP-Referer: https://github.com/tgrecojr/gmailclassifier
+HTTP-Referer: https://github.com/chainringlabs/gmailclassifier
 X-Title: gmailclassifier
 
 {

@@ -198,7 +198,7 @@ class JevClassifier:
             transport=transport,
             headers={
                 "Authorization": f"Bearer {api_key}",
-                "HTTP-Referer": "https://github.com/tgrecojr/gmailclassifier",
+                "HTTP-Referer": "https://github.com/chainringlabs/gmailclassifier",
                 "X-Title": "gmailclassifier",
             },
         )
