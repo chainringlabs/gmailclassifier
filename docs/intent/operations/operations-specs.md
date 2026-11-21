@@ -27,10 +27,11 @@ Status markers: `[x]` observed working in current code, `[ ]` specified but brok
 
 ## Dependency Scanning and Policy
 
-- [x] **OPS-DEPS-001**: The supply-chain scan shall export the frozen lockfile to a requirements file, run an OSV scan of `uv.lock`, run pip-audit on the exported requirements, and run a Socket Security scan only when its API key secret is present.
+- [x] **OPS-DEPS-001**: When a commit is pushed to `main`, every Monday, and on manual dispatch, the supply-chain scan shall export the frozen lockfile to a requirements file, fail on any known vulnerability in `uv.lock` (OSV) or in the exported requirements (pip-audit), and run a Socket Security scan only when its API key secret is present.
 - [x] **OPS-DEPS-002**: Renovate shall extend the shared preset `github>chainringlabs/renovate-config`, under which it shall group minor and patch updates into one pull request, wait until the release is seven days old, and automerge them; vulnerability fixes shall open immediately and automerge once seven days old; major updates shall not be automerged and shall carry the `major-update` label.
 - [x] **OPS-DEPS-003**: Renovate shall update the Chainguard builder and runtime images together in a single pull request.
 - [x] **OPS-DEPS-004**: Renovate shall pin Docker image and GitHub Actions digests, raise digest updates at any time and automerge them, and run lockfile maintenance weekly before 4am on Mondays without automerging it.
+- [x] **OPS-DEPS-005**: When a pull request is opened or updated, the supply-chain scan shall compare an OSV scan of the pull request's `uv.lock` with one of the base branch's and shall fail only on vulnerabilities the pull request introduces, and shall run the Socket Security scan only when its API key secret is present.
 
 ## Pre-flight Verification
 
