@@ -2,7 +2,7 @@
 # Gmail Email Classifier - Dockerfile
 # @spec OPS-IMAGE-001, OPS-IMAGE-002, OPS-IMAGE-003, OPS-IMAGE-004, OPS-IMAGE-005
 
-FROM cgr.dev/chainguard/python:latest-dev@sha256:42c7616876638d3fc9f6663aeb159a346ebe494aced2c7c2c1bb990245ba45b8 AS builder
+FROM cgr.dev/chainguard/python:latest-dev@sha256:69e90282a0f83fcd7a8f3e94e93755f6d3e340280639c2bf6440522085c6ae90 AS builder
 
 USER root
 
@@ -22,7 +22,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 RUN mkdir -p /app/data && chown -R nonroot:nonroot /app
 
-FROM cgr.dev/chainguard/python:latest@sha256:8ee621c22371d08cc07f734704837da58b48b12fe52815fd81e1f426c082fb6c
+FROM cgr.dev/chainguard/python:latest@sha256:9c4bfa852765da1bfb86d4d500c3333db1c0929c4b9845a90ca7d199d857f90c
 
 WORKDIR /app
 
