@@ -31,12 +31,13 @@ Exit 0 with the run command when every check passes; otherwise exit 1 with a poi
 
 ## Container Image
 
-Two stages, both on Chainguard Python images pinned by digest:
+Two stages, both on Chainguard Python images pinned by digest, taken from the 3-day-delayed
+copies that chainringlabs/base-images publishes (`ghcr.io/chainringlabs/base/python{,-dev}:aged`):
 
 | Stage | Base | Does |
 |---|---|---|
-| builder | `cgr.dev/chainguard/python:latest-dev` | copies `uv` from the pinned `ghcr.io/astral-sh/uv` image; `uv sync --frozen --no-dev --no-install-project` into `/app/.venv` with bytecode compiled and Python downloads disabled; creates `/app/data`; chowns `/app` to `nonroot` |
-| runtime | `cgr.dev/chainguard/python:latest` | copies the venv and data dir from the builder; copies root-level `*.py`; sets `PATH` to the venv and container defaults for the Gmail paths, headless mode, label file path, and state file; `CMD ["python", "main.py"]` |
+| builder | `ghcr.io/chainringlabs/base/python-dev:aged` | copies `uv` from the pinned `ghcr.io/astral-sh/uv` image; `uv sync --frozen --no-dev --no-install-project` into `/app/.venv` with bytecode compiled and Python downloads disabled; creates `/app/data`; chowns `/app` to `nonroot` |
+| runtime | `ghcr.io/chainringlabs/base/python:aged` | copies the venv and data dir from the builder; copies root-level `*.py`; sets `PATH` to the venv and container defaults for the Gmail paths, headless mode, label file path, and state file; `CMD ["python", "main.py"]` |
 
 Container defaults: `GMAIL_CREDENTIALS_PATH=/app/credentials.json`, `GMAIL_TOKEN_PATH=/app/token.json`, `GMAIL_HEADLESS_MODE=true`, `CLASSIFIER_CONFIG_PATH=/app/classifier_config.json`, `STATE_FILE=/app/data/.email_state.json`.
 
